@@ -35,6 +35,8 @@ try { Add-Type -AssemblyName System.Xaml } catch { }
 $script:LogPath = Join-Path $env:TEMP 'DeepSeekPet.log'
 $socialPath = Join-Path $PSScriptRoot 'social.ps1'
 if (Test-Path -LiteralPath $socialPath) { . $socialPath }
+$socialPath = Join-Path $PSScriptRoot 'social.ps1'
+if (Test-Path -LiteralPath $socialPath) { . $socialPath }
 function Write-PetLog([string]$msg) {
     try { Add-Content -LiteralPath $script:LogPath -Value ('[{0}] {1}' -f (Get-Date -Format 'HH:mm:ss'), $msg) -Encoding UTF8 } catch { }
 }
@@ -288,6 +290,15 @@ $xaml = @'
     </Canvas>
   </Canvas>
 
+  <!-- 说话气泡(放在 PetWrap 之外, 所以不会跟着宠物一起旋转) -->
+  <Border x:Name="SayBubble" Canvas.Left="16" Canvas.Top="2" MaxWidth="208" CornerRadius="14"
+          Background="#F2FFFFFF" BorderBrush="#4D4D6BFE" BorderThickness="1.2" Padding="10,6"
+          Visibility="Collapsed" IsHitTestVisible="False">
+    <Border.Effect>
+      <DropShadowEffect Color="#4D10306E" BlurRadius="10" ShadowDepth="2" Direction="270" Opacity="0.45"/>
+    </Border.Effect>
+    <TextBlock x:Name="SayText" FontFamily="Microsoft YaHei UI" FontSize="14" Foreground="#FF10265E" TextWrapping="Wrap"/>
+  </Border>
   <Canvas x:Name="OrbitLayer" Width="240" Height="240" IsHitTestVisible="False"/>
   <Canvas x:Name="ParticleLayer" Width="240" Height="240" IsHitTestVisible="False"/>
 </Canvas>
@@ -317,7 +328,7 @@ $EyeOpen = N 'EyeOpen'; $EyeHappy = N 'EyeHappy'; $EyeScale = N 'EyeScale'; $Eye
 $Mouth = N 'Mouth'; $MouthSmile = N 'MouthSmile'; $MouthFlat = N 'MouthFlat'; $MouthOpen = N 'MouthOpen'
 $Blush = N 'Blush'
 $OrbitLayer = N 'OrbitLayer'; $ParticleLayer = N 'ParticleLayer'
-
+$SayBubble = N 'SayBubble'; $SayText = N 'SayText'
 # ---------------------------------------------------------------- 计时元素
 $script:Orbit = New-Object System.Collections.ArrayList
 $script:Orbit = New-Object System.Collections.ArrayList
@@ -596,6 +607,7 @@ function Invoke-Pat {
     $script:PatCount++
     $script:PatT = 0.0
     $script:ExprForce = 'happy'; $script:ExprUntil = $script:T + 1.1
+    Say-IfSocial 'Pat'
     Spawn-Hearts 4
     Spawn-Bubble 4 104 92
     $roll = $script:Rng.NextDouble()
@@ -645,10 +657,30 @@ function Initialize-PetSocial {
         }
         Busy = { $script:State -ne 'idle' }
         Sleepy = { [bool]$script:Sleepy }
+        StopMove = { End-State }
+        Say = {
+            param($t)
+            $SayText.Text = $t
+            $SayBubble.Visibility = 'Visible'
+        }
+        HideSay = { $SayBubble.Visibility = 'Collapsed' }
+        Lines = @{
+            Greet = @('咕噜~', '你好呀', '噗——')
+            Play  = @('一起来！', '看我的尾巴！')
+            Visit = @('我游过来啦', '在吗？')
+            Pat   = @('好舒服~', '咕噜咕噜')
+            Idle  = @('泡泡…', '在想事情', '水里好凉快')
+        }
     }
     if (-not (Connect-PetSocial -SelfId 'deepseek' -Hooks $hooks)) { $script:SocialReady = $true; return $false }
     $script:SocialReady = $true
     return $true
+}
+function Say-IfSocial([string]$Kind) {
+    if (-not $script:SocialReady) { return }
+    if (-not (Get-Command Say-PetThing -ErrorAction SilentlyContinue)) { return }
+    $ln = Get-PetSocialLine $Kind
+    if ($ln) { Say-PetThing $ln 2.3 }
 }
 function Update-PetSocialTick([double]$dt) {
     if (-not $script:SocialReady) { if (-not (Initialize-PetSocial)) { return } }

@@ -13,4 +13,4 @@ $EyeOpen = N 'EyeOpen'; $EyeHappy = N 'EyeHappy'; $EyeScale = N 'EyeScale'; $Eye
 $Mouth = N 'Mouth'; $MouthSmile = N 'MouthSmile'; $MouthFlat = N 'MouthFlat'; $MouthOpen = N 'MouthOpen'
 $Blush = N 'Blush'
 $OrbitLayer = N 'OrbitLayer'; $ParticleLayer = N 'ParticleLayer'
-
+$SayBubble = N 'SayBubble'; $SayText = N 'SayText'
