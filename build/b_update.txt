@@ -1,4 +1,4 @@
-﻿function Update-Pet([double]$dt) {
+function Update-Pet([double]$dt) {
     $script:T += $dt
     $script:StateT += $dt
     if ($script:PatT -ge 0) { $script:PatT += $dt }
@@ -145,15 +145,26 @@
     if ($script:T -ge $script:ExprUntil -and $script:ExprForce -ne '') { $script:ExprForce = '' }
     Set-Expression $expr
 
+    # ---- 三只桌宠联动(感知同伴, 打招呼/对视/一起玩/串门) ----
+    Update-PetSocialTick $dt
+
+    # 兜底: NaN / Infinity 一旦写进变换, 元素就直接不渲染了
+    if ([double]::IsNaN($rot) -or [double]::IsInfinity($rot)) { $rot = 0.0 }
+    if ([double]::IsNaN($sx) -or [double]::IsInfinity($sx) -or $sx -le 0.01) { $sx = 1.0 }
+    if ([double]::IsNaN($sy) -or [double]::IsInfinity($sy) -or $sy -le 0.01) { $sy = 1.0 }
+    if ([double]::IsNaN($oy) -or [double]::IsInfinity($oy)) { $oy = 0.0 }
+    if ([double]::IsNaN($lookX) -or [double]::IsInfinity($lookX)) { $lookX = 0.0 }
+    if ([double]::IsNaN($lookY) -or [double]::IsInfinity($lookY)) { $lookY = 0.0 }
+
     # ---- 应用到界面 ----
-    $TRot.Angle = $rot
+    $TRot.Angle = $rot + $script:SocialTilt
     $TScale.ScaleX = $sx
     $TScale.ScaleY = $sy
     $TTrans.X = $ox
     $TTrans.Y = $oy
     $EyeScale.ScaleY = $script:EyeBase * $blink
-    $EyeLook.X = $lookX
-    $EyeLook.Y = $lookY
+    $EyeLook.X = $lookX + $script:SocialLookX
+    $EyeLook.Y = $lookY + $script:SocialLookY
     $TailRot.Angle = $tailA
     $FinRot.Angle = $finA
     $Blush.Opacity = [Math]::Max(0.0, [Math]::Min(1.0, $blushAmt))
