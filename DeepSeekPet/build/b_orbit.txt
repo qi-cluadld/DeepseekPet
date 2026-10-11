@@ -1,0 +1,24 @@
+$script:Orbit = New-Object System.Collections.ArrayList
+function Initialize-Orbit {
+    $i = 0
+    foreach ($phase in @(0.5, 2.6, 4.7)) {
+        $b = New-Object System.Windows.Shapes.Ellipse
+        $b.Width = 16; $b.Height = 16
+        $b.Fill = New-RadBrush -inner '#4DFFFFFF' -outer '#2E7FB4FF' -gx 0.34 -gy 0.30 -rx 0.5 -ry 0.5
+        $b.Stroke = New-Object System.Windows.Media.SolidColorBrush ([System.Windows.Media.Color][System.Windows.Media.ColorConverter]::ConvertFromString('#73A8C8FF'))
+        $b.StrokeThickness = 1.4
+        $b.RenderTransformOrigin = New-Object System.Windows.Point(0.5, 0.5)
+        $rt = New-Object System.Windows.Media.RotateTransform(0)
+        $b.RenderTransform = $rt
+        $b.IsHitTestVisible = $false
+        [void]$OrbitLayer.Children.Add($b)
+        [void]$script:Orbit.Add(@{
+                El = $b; Rot = $rt; Phase = $phase
+                Speed = 0.32 + 0.06 * $i
+                Radius = 90.0 + 9.0 * $i
+            })
+        $i++
+    }
+}
+Initialize-Orbit
+

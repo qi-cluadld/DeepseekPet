@@ -1,0 +1,15 @@
+#Requires -Version 5.1
+<#
+  DeepSeek 桌面小宠物 / DeepSeek Desktop Pet  🐋
+  ---------------------------------------------------------------
+  * 纯 Windows 自带组件实现(WPF + PowerShell 5.1),无需安装任何依赖
+  * 一只 DeepSeek 蓝鲸小精灵:待机漂浮摆尾 / 随机小动作 / 戳一戳有反应
+  * 左键拖动移动,右键菜单(打招呼、摸摸头、喷水柱、吹泡泡、大小、游到别处、退出)
+  * 不抢焦点(可在你打字时安静地待在角落)
+
+  用法:
+    powershell -NoProfile -ExecutionPolicy Bypass -File DeepSeekPet.ps1
+    powershell ... -File DeepSeekPet.ps1 -Size 1.3          # 放大
+    powershell ... -File DeepSeekPet.ps1 -Preview out        # 渲染静态预览图(检查外观)
+    powershell ... -File DeepSeekPet.ps1 -SelfTest 20        # 自检 20 秒(自动跑一遍所有动作)
+#>

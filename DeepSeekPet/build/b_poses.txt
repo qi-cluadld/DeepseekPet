@@ -1,0 +1,14 @@
+    $poses = @(
+        @{ n = '01_idle'; step = 0.033; times = 4; act = {} },
+        @{ n = '02_blink'; step = 0.033; times = 3; act = { $script:BlinkT = 0.07 } },
+        @{ n = '03_flap'; step = 0.033; times = 20; act = { Start-Action 'flap' } },
+        @{ n = '04_breach'; step = 0.033; times = 12; act = { Start-Action 'breach' } },
+        @{ n = '05_roll'; step = 0.033; times = 14; act = { Start-Action 'roll' } },
+        @{ n = '06_spout'; step = 0.033; times = 10; act = { Start-Action 'spout' } },
+        @{ n = '07_pat'; step = 0.033; times = 5; act = { Invoke-Pat } },
+        @{ n = '08_bubbles'; step = 0.033; times = 26; act = { Start-Action 'bubbles' } },
+        @{ n = '09_sleep'; step = 0.05; times = 44; act = { Enter-Sleep } },
+        @{ n = '10_stretch'; step = 0.033; times = 17; act = { Start-Action 'stretch' } },
+        @{ n = '11_look'; step = 0.033; times = 22; act = { Start-Action 'look' } },
+        @{ n = '12_swim'; step = 0.033; times = 26; act = { Start-Action 'swim' } }
+    )

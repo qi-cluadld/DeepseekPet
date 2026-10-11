@@ -1,0 +1,16 @@
+$PetWrap = N 'PetWrap'
+$Pet = N 'Pet'
+$Pet.CacheMode = New-Object System.Windows.Media.BitmapCache
+$Pet.CacheMode.RenderAtScale = 1.0
+$Pet.CacheMode.EnableClearType = $false
+$TScale = N 'TScale'; $TRot = N 'TRot'; $TTrans = N 'TTrans'
+$Body = N 'Body'
+$Tail = N 'Tail'; $TailRot = N 'TailRot'
+$Fin = N 'Fin'; $FinRot = N 'FinRot'
+$Belly = N 'Belly'
+$Belly.Clip = [System.Windows.Media.Geometry]::Parse($script:BodyData)
+$EyeOpen = N 'EyeOpen'; $EyeHappy = N 'EyeHappy'; $EyeScale = N 'EyeScale'; $EyeLook = N 'EyeLook'
+$Mouth = N 'Mouth'; $MouthSmile = N 'MouthSmile'; $MouthFlat = N 'MouthFlat'; $MouthOpen = N 'MouthOpen'
+$Blush = N 'Blush'
+$OrbitLayer = N 'OrbitLayer'; $ParticleLayer = N 'ParticleLayer'
+

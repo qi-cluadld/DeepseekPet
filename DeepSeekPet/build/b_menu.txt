@@ -1,0 +1,19 @@
+$menu = New-Object System.Windows.Controls.ContextMenu
+$menu.FontFamily = New-Object System.Windows.Media.FontFamily('Microsoft YaHei UI')
+$menu.FontSize = 13
+[void]$menu.Items.Add((New-MenuItem '👋  打个招呼' { $script:IdleSince = $script:T; Wake-Pet; Start-Action 'flap'; $script:ExprForce = 'happy'; $script:ExprUntil = $script:T + 1.6 }))
+[void]$menu.Items.Add((New-MenuItem '💗  摸摸头' { Invoke-Pat }))
+[void]$menu.Items.Add((New-MenuItem '💧  喷个水柱' { $script:IdleSince = $script:T; Wake-Pet; Start-Action 'spout' }))
+[void]$menu.Items.Add((New-MenuItem '🔵  吹泡泡' { $script:IdleSince = $script:T; Wake-Pet; Start-Action 'bubbles' }))
+[void]$menu.Items.Add((New-MenuItem '😴  去睡觉' { Enter-Sleep }))
+[void]$menu.Items.Add((New-Object System.Windows.Controls.Separator))
+$miSize = New-Object System.Windows.Controls.MenuItem
+$miSize.Header = '大小'
+foreach ($opt in @(@('小', 0.7), @('中', 1.0), @('大', 1.4))) {
+    $sub = New-MenuItem $opt[0] ([scriptblock]::Create("Set-PetSize $($opt[1])"))
+    [void]$miSize.Items.Add($sub)
+}
+[void]$menu.Items.Add($miSize)
+[void]$menu.Items.Add((New-MenuItem '🌊  游到别处' { $script:IdleSince = $script:T; Start-Action 'swim' }))
+[void]$menu.Items.Add((New-Object System.Windows.Controls.Separator))
+[void]$menu.Items.Add((New-MenuItem '❌  退出' { $win.Close() }))

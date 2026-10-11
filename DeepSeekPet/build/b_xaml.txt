@@ -1,0 +1,185 @@
+﻿$xaml = @'
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="Root" Width="240" Height="240" ClipToBounds="False">
+
+  <Canvas x:Name="PetWrap" Width="240" Height="240" Canvas.Left="0" Canvas.Top="0"
+          RenderTransformOrigin="0.5,0.5" Cursor="Hand" ClipToBounds="False">
+    <Canvas.RenderTransform>
+      <TransformGroup>
+        <ScaleTransform x:Name="TScale" ScaleX="1" ScaleY="1"/>
+        <RotateTransform x:Name="TRot" Angle="0"/>
+        <TranslateTransform x:Name="TTrans" X="0" Y="0"/>
+      </TransformGroup>
+    </Canvas.RenderTransform>
+    <Canvas x:Name="Pet" Width="240" Height="240">
+
+      <!-- 水光晕 -->
+      <Ellipse Width="232" Height="232" Canvas.Left="4" Canvas.Top="4" Opacity="0.5" IsHitTestVisible="False">
+        <Ellipse.Fill>
+          <RadialGradientBrush>
+            <GradientStop Color="#66B6D4FF" Offset="0.30"/>
+            <GradientStop Color="#334D6BFE" Offset="0.68"/>
+            <GradientStop Color="#002BC8FF" Offset="1"/>
+          </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+
+      <!-- 尾鳍(在身体后面) -->
+      <Path x:Name="Tail" Data="{TAIL}" IsHitTestVisible="False">
+        <Path.Fill>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FF7B96FF" Offset="0"/>
+            <GradientStop Color="#FF4360E8" Offset="0.55"/>
+            <GradientStop Color="#FF2E45B8" Offset="1"/>
+          </LinearGradientBrush>
+        </Path.Fill>
+        <Path.RenderTransform>
+          <RotateTransform x:Name="TailRot" CenterX="178" CenterY="136" Angle="0"/>
+        </Path.RenderTransform>
+      </Path>
+
+      <!-- 身体(深蓝鲸身) -->
+      <Path x:Name="Body" Data="{BODY}" IsHitTestVisible="True">
+        <Path.Fill>
+          <LinearGradientBrush StartPoint="0.18,0.02" EndPoint="0.72,1">
+            <GradientStop Color="#FF82A3FF" Offset="0"/>
+            <GradientStop Color="#FF4D6BFE" Offset="0.42"/>
+            <GradientStop Color="#FF3A55DC" Offset="1"/>
+          </LinearGradientBrush>
+        </Path.Fill>
+        <Path.Effect>
+          <DropShadowEffect Color="#7A1E38B4" BlurRadius="16" ShadowDepth="5" Direction="270" Opacity="0.5"/>
+        </Path.Effect>
+      </Path>
+
+      <!-- 肚皮(浅色, 由身体形状裁剪) -->
+      <Path x:Name="Belly" Data="{BELLY}" IsHitTestVisible="False">
+        <Path.Fill>
+          <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#00FFFFFF" Offset="0"/>
+            <GradientStop Color="#A6EAF1FF" Offset="0.5"/>
+            <GradientStop Color="#D9F4F8FF" Offset="1"/>
+          </LinearGradientBrush>
+        </Path.Fill>
+      </Path>
+
+      <!-- 背部高光 -->
+      <Path Data="{BODY}" IsHitTestVisible="False">
+        <Path.Fill>
+          <RadialGradientBrush GradientOrigin="0.30,0.14" Center="0.30,0.14" RadiusX="0.66" RadiusY="0.52">
+            <GradientStop Color="#73FFFFFF" Offset="0"/>
+            <GradientStop Color="#00FFFFFF" Offset="1"/>
+          </RadialGradientBrush>
+        </Path.Fill>
+      </Path>
+
+      <!-- 胸鳍 -->
+      <Path x:Name="Fin" Data="{FIN}" IsHitTestVisible="False">
+        <Path.Fill>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FF6D8BFF" Offset="0"/>
+            <GradientStop Color="#FF3B58E4" Offset="1"/>
+          </LinearGradientBrush>
+        </Path.Fill>
+        <Path.RenderTransform>
+          <RotateTransform x:Name="FinRot" CenterX="96" CenterY="156" Angle="0"/>
+        </Path.RenderTransform>
+      </Path>
+
+      <!-- 喷气孔 -->
+      <Ellipse Width="13" Height="6" Canvas.Left="100" Canvas.Top="88" Fill="#8C1F3480" IsHitTestVisible="False">
+        <Ellipse.RenderTransform>
+          <RotateTransform CenterX="7.5" CenterY="3.5" Angle="-10"/>
+        </Ellipse.RenderTransform>
+      </Ellipse>
+
+      <!-- 眼睛(睁) -->
+      <Canvas x:Name="EyeOpen" Width="240" Height="240" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
+        <Canvas.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform x:Name="EyeScale" ScaleX="1" ScaleY="1"/>
+            <TranslateTransform x:Name="EyeLook" X="0" Y="0"/>
+          </TransformGroup>
+        </Canvas.RenderTransform>
+        <Ellipse Width="27" Height="30" Canvas.Left="80.5" Canvas.Top="109.5">
+          <Ellipse.Fill>
+            <LinearGradientBrush StartPoint="0.2,0" EndPoint="0.8,1">
+              <GradientStop Color="#FF26325C" Offset="0"/>
+              <GradientStop Color="#FF0E1630" Offset="1"/>
+            </LinearGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse Width="27" Height="30" Canvas.Left="120.5" Canvas.Top="109.5">
+          <Ellipse.Fill>
+            <LinearGradientBrush StartPoint="0.2,0" EndPoint="0.8,1">
+              <GradientStop Color="#FF26325C" Offset="0"/>
+              <GradientStop Color="#FF0E1630" Offset="1"/>
+            </LinearGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse Width="10" Height="10" Canvas.Left="85" Canvas.Top="113" Fill="#FFFFFFFF" Opacity="0.95"/>
+        <Ellipse Width="10" Height="10" Canvas.Left="125" Canvas.Top="113" Fill="#FFFFFFFF" Opacity="0.95"/>
+        <Ellipse Width="4.5" Height="4.5" Canvas.Left="100" Canvas.Top="127" Fill="#FFFFFFFF" Opacity="0.6"/>
+        <Ellipse Width="4.5" Height="4.5" Canvas.Left="140" Canvas.Top="127" Fill="#FFFFFFFF" Opacity="0.6"/>
+      </Canvas>
+
+      <!-- 眼睛(笑成弯月) -->
+      <Canvas x:Name="EyeHappy" Width="240" Height="240" Visibility="Collapsed" IsHitTestVisible="False">
+        <Path Data="M -12,3 Q 0,-10 12,3" Stroke="#FF16213E" StrokeThickness="4.2"
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round">
+          <Path.RenderTransform>
+            <TranslateTransform X="94" Y="125"/>
+          </Path.RenderTransform>
+        </Path>
+        <Path Data="M -12,3 Q 0,-10 12,3" Stroke="#FF16213E" StrokeThickness="4.2"
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round">
+          <Path.RenderTransform>
+            <TranslateTransform X="134" Y="125"/>
+          </Path.RenderTransform>
+        </Path>
+      </Canvas>
+
+      <!-- 嘴 -->
+      <Canvas x:Name="Mouth" Width="240" Height="240" IsHitTestVisible="False">
+        <Path x:Name="MouthSmile" Data="M -10,0 Q 0,10 10,0" Stroke="#FF16213E" StrokeThickness="3.4"
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+          <Path.RenderTransform>
+            <TranslateTransform X="114" Y="152"/>
+          </Path.RenderTransform>
+        </Path>
+        <Path x:Name="MouthFlat" Data="M -8,0 L 8,0" Stroke="#FF16213E" StrokeThickness="3.4"
+              StrokeStartLineCap="Round" StrokeEndLineCap="Round" Visibility="Collapsed">
+          <Path.RenderTransform>
+            <TranslateTransform X="114" Y="153"/>
+          </Path.RenderTransform>
+        </Path>
+        <Ellipse x:Name="MouthOpen" Width="13" Height="15" Canvas.Left="107.5" Canvas.Top="145" Fill="#FF16213E" Visibility="Collapsed"/>
+      </Canvas>
+
+      <!-- 腮红 -->
+      <Canvas x:Name="Blush" Width="240" Height="240" Opacity="0" IsHitTestVisible="False">
+        <Ellipse Width="26" Height="13" Canvas.Left="65" Canvas.Top="136">
+          <Ellipse.Fill>
+            <RadialGradientBrush>
+              <GradientStop Color="#FFFF8FB4" Offset="0"/>
+              <GradientStop Color="#00FF8FB4" Offset="1"/>
+            </RadialGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse Width="26" Height="13" Canvas.Left="137" Canvas.Top="136">
+          <Ellipse.Fill>
+            <RadialGradientBrush>
+              <GradientStop Color="#FFFF8FB4" Offset="0"/>
+              <GradientStop Color="#00FF8FB4" Offset="1"/>
+            </RadialGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+      </Canvas>
+    </Canvas>
+  </Canvas>
+
+  <Canvas x:Name="OrbitLayer" Width="240" Height="240" IsHitTestVisible="False"/>
+  <Canvas x:Name="ParticleLayer" Width="240" Height="240" IsHitTestVisible="False"/>
+</Canvas>
+'@
