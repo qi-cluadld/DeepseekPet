@@ -165,6 +165,23 @@ DeepSeekPet\
 
 ---
 
+## 同系列（十只）
+
+| 宠物 | 品牌 | 仓库 |
+| --- | --- | --- |
+| 小星星 ✨ | Gemini | https://github.com/qi-cluadld/GeminiPet |
+| 小鲸鱼 🐋 | DeepSeek | https://github.com/qi-cluadld/DeepseekPet |
+| 小花 ✦ | ChatGPT | https://github.com/qi-cluadld/ChatGPTPet |
+| 小太阳 ☀ | Claude | https://github.com/qi-cluadld/ClaudePet |
+| 小豆包 🥟 | 豆包 | https://github.com/qi-cluadld/DoubaoPet |
+| 小千 🌀 | 通义千问 | https://github.com/qi-cluadld/QwenPet |
+| 小飞 🚀 | Copilot | https://github.com/qi-cluadld/CopilotPet |
+| 小象 ⭕ | 智谱 GLM | https://github.com/qi-cluadld/GLMPet |
+| 小格 ⚔ | Grok | https://github.com/qi-cluadld/GrokPet |
+| 小智 ✨ | Apple Intelligence | https://github.com/qi-cluadld/ApplePet |
+
+十只可以**同时运行并互相联动**：打招呼、真对话（带话题记忆）、传爱心、追逐、吵架和好，以及**一对一打架**。
+一键安装包（含十只，可自选）：https://github.com/qi-cluadld/DesktopPetsInstaller/releases
 ## License
 
 [MIT](LICENSE)
