@@ -1,4 +1,4 @@
-# DeepSeek 桌面小宠物 🐋
+﻿# DeepSeek 桌面小宠物 🐋
 
 > 📦 **免安装下载**：[Releases](https://github.com/qi-cluadld/DeepseekPet/releases/latest) 下载 zip，解压后双击 `启动宠物.vbs` 即可（不用 clone、不用装任何运行库）。
 
@@ -165,7 +165,7 @@ DeepSeekPet\
 
 ---
 
-## 同系列（十只）
+## 同系列（十二只）
 
 | 宠物 | 品牌 | 仓库 |
 | --- | --- | --- |
@@ -178,10 +178,12 @@ DeepSeekPet\
 | 小飞 🚀 | Copilot | https://github.com/qi-cluadld/CopilotPet |
 | 小象 ⭕ | 智谱 GLM | https://github.com/qi-cluadld/GLMPet |
 | 小格 ⚔ | Grok | https://github.com/qi-cluadld/GrokPet |
+| **小谷** | 渐变 G（2025） | [GoogleGPet](https://github.com/qi-cluadld/GoogleGPet) |
+| **小彩** | 扁平四色 G（2015） | [GoogleFlatPet](https://github.com/qi-cluadld/GoogleFlatPet) |
 | 小智 ✨ | Apple Intelligence | https://github.com/qi-cluadld/ApplePet |
 
-十只可以**同时运行并互相联动**：打招呼、真对话（带话题记忆）、传爱心、追逐、吵架和好，以及**一对一打架**。
-一键安装包（含十只，可自选）：https://github.com/qi-cluadld/DesktopPetsInstaller/releases
+十二只可以**同时运行并互相联动**：打招呼、真对话（带话题记忆）、传爱心、追逐、吵架和好，以及**一对一打架**。
+一键安装包（含十二只，可自选）：https://github.com/qi-cluadld/DesktopPetsInstaller/releases
 ## License
 
 [MIT](LICENSE)
